@@ -1,0 +1,45 @@
+﻿@page "/summary"
+
+@*<div class="container">*@
+    <h6>Round Statistics</h6>
+    <table class="table table-striped table-bordered table-sm">
+        <tbody>
+            <tr>
+                <td>Score</td>
+                <td>@Player.ScoreCard.TotalScore @Player.ScoreCard.ScoreRelativeToPar</td>
+            </tr>
+            <tr>
+                <td>Points</td>
+                <td>@Player.ScoreCard.TotalPoints</td>
+            </tr>
+
+            <tr>
+                <td>Fairways</td>
+                <td>@Player.ScoreCard.TotalFairways</td>
+            </tr>
+
+            <tr>
+                <td>Greens</td>
+                <td>@Player.ScoreCard.TotalGreens</td>
+            </tr>
+
+            <tr>
+                <td>Putts</td>
+                <td>@Player.ScoreCard.TotalPutts</td>
+            </tr>
+        </tbody>
+
+    </table>
+@*</div>*@
+
+
+@code {
+
+    [Parameter]
+    public Domain.MatchPlayer Player { get; set; }
+
+
+    [Parameter]
+    public Domain.Match PassedMatch { get; set; }
+
+}

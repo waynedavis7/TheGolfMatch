@@ -1,0 +1,367 @@
+﻿@page "/playerscorecard"
+@inject TheMatch.Domain.IMatchRepository MatchRepository
+
+<div class="container">
+
+    <h4 class="text-center"><span class="pull-left @selectedHole.ScoreDescription">&nbsp;@selectedHole.Score&nbsp;</span>@Player.Name <span class="pull-right @selectedHole.ScoreDescription">&nbsp;@selectedHole.Score&nbsp;</span></h4>
+    <div class="playerBanner">
+        <h4 class="text-center playerHeading">@PassedMatch.Course.Name # @hole | Par: @par </h4>
+        <h6 class="text-center playerHeading">Tees: @selectedHole.Tee | Yards: @selectedHole.Yards | Handicap: @selectedHole.Handicap</h6>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col text-center">
+            <button type="button" class="btn btn-outline-dark btn-sm scoreButton font-weight-bolder @IsActiveScoreButton(-2)" @onclick="(() => UpdateScoreWithButton(-2))">&nbsp;Eagle&nbsp;</button>
+            <button type="button" class="btn btn-outline-dark btn-sm scoreButton font-weight-bolder @IsActiveScoreButton(-1)" @onclick="(() => UpdateScoreWithButton(-1))">&nbsp;Birdie&nbsp;</button>
+            <button type="button" class="btn btn-outline-dark btn-sm scoreButton font-weight-bolder @IsActiveScoreButton(0)" @onclick="(() => UpdateScoreWithButton(0))">&nbsp;&nbsp;&nbsp;Par&nbsp;&nbsp;&nbsp;</button>
+
+        </div>
+
+    </div>
+    <div class="row justify-content-center">
+        <div class="col text-center">
+            <i class="fas fas fa-arrow-left fa-2x holeNavigationDown pull-left" @onclick="UpdateHoleDown"></i>
+            <button type="button" class="btn btn-outline-dark btn-sm scoreButton font-weight-bolder @IsActiveScoreButton(3)" @onclick="(() => UpdateScoreWithButton(+3))">&nbsp;Triple&nbsp;</button>
+            <button type="button" class="btn btn-outline-dark btn-sm scoreButton font-weight-bolder @IsActiveScoreButton(2)" @onclick="(() => UpdateScoreWithButton(+2))">Double</button>
+            <button type="button" class="btn btn-outline-dark btn-sm scoreButton font-weight-bolder @IsActiveScoreButton(1)" @onclick="(() => UpdateScoreWithButton(+1))">Bogey</button>
+            <i class="fas fa-arrow-right fa-2x holeNavigationUp pull-right" @onclick="UpdateHoleUp"></i>
+        </div>
+    </div>
+       
+    <div class="mx-3">
+        <br />
+    </div>
+
+    @if (par > 3)
+    {
+        <div class="pull-right">
+            <label>Fairway</label>
+            <div class="btn-group btn-sm btn-group-toggle" data-toggle="buttons">
+                <label class="btn btn-sm  btn-outline-dark @FairWayChecked(0)">
+                    <input type="radio" name="options" id="Fairway" autocomplete="off" @onclick="@(() => FairWaySelectionChanged(0))"> <span class=" fas fa-check"></span>
+                </label>
+                <label class="btn btn-sm  btn-outline-dark @FairWayChecked(1)">
+                    <input type="radio" name="options" id="Left" autocomplete="off" @onclick="@(() => FairWaySelectionChanged(1))"> <span class="fas fa-arrow-left"></span>
+                </label>
+                <label class="btn btn-sm  btn-outline-dark @FairWayChecked(2)">
+                    <input type="radio" name="options" id="Right" autocomplete="off" @onclick="@(() => FairWaySelectionChanged(2))"> <span class="fas fa-arrow-right"></span>
+                </label>
+                <label class="btn btn-sm  btn-outline-dark @FairWayChecked(3)">
+                    <input type="radio" name="options" id="Long" autocomplete="off" @onclick="@(() => FairWaySelectionChanged(3))"> <span class="fas fa-arrow-up"></span>
+                </label>
+                <label class="btn btn-sm  btn-outline-dark @FairWayChecked(4)">
+                    <input type="radio" name="options" id="Short" autocomplete="off" @onclick="@(() => FairWaySelectionChanged(4))"> <span class="fas fa-arrow-down"></span>
+                </label>
+            </div>
+        </div>
+    }
+
+    <div class="pull-right">
+        <label>Green in Regulation</label>
+        <div class="btn-group btn-sm btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-sm  btn-outline-dark @GreensChecked(0)">
+                <input type="radio" name="options" id="Yes" autocomplete="off" @onclick="@(() => GreenSelectionChanged(0))"> <span class="fas fa-check"></span>
+            </label>
+            <label class="btn btn-sm  btn-outline-dark @GreensChecked(1)">
+                <input type="radio" name="options" id="No" autocomplete="off" @onclick="@(() => GreenSelectionChanged(1))"> <span class="fas fa-times"></span>
+            </label>
+        </div>
+    </div>
+
+    <div class="pull-right">
+        <label>Number of Putts</label>
+        <div class="btn-group btn-sm btn-group-toggle" data-toggle="buttons">
+            <label class="btn btn-sm  btn-outline-dark font-weight-bold @PuttsChecked(0)">
+                <input type="radio" name="options" id="0" autocomplete="off" @onclick="@(() => PuttsSelectionChanged(0))"> 0
+            </label>
+            <label class="btn btn-sm  btn-outline-dark font-weight-bold @PuttsChecked(1)">
+                <input type="radio" name="options" id="1" autocomplete="off" @onclick="@(() => PuttsSelectionChanged(1))"> 1
+            </label>
+            <label class="btn btn-sm  btn-outline-dark font-weight-bold @PuttsChecked(2)">
+                <input type="radio" name="options" id="2" autocomplete="off" @onclick="@(() => PuttsSelectionChanged(2))"> 2
+            </label>
+            <label class="btn btn-sm  btn-outline-dark font-weight-bold @PuttsChecked(3)">
+                <input type="radio" name="options" id="3" autocomplete="off" @onclick="@(() => PuttsSelectionChanged(3))"> 3
+            </label>
+            <label class="btn btn-sm  btn-outline-dark font-weight-bold @PuttsChecked(4)">
+                <input type="radio" name="options" id="4" autocomplete="off" @onclick="@(() => PuttsSelectionChanged(4))"> 4
+            </label>
+
+        </div>
+    </div>
+      
+    <div class="form-group">
+        <textarea class="form-control" id="txtNotes" @bind="@notes" />
+    </div>
+    <div>
+        <p style="">
+            <button type="button" class="btn btn-primary btn-sm btn-block" @onclick="PlayerCardClosed">Back To Leaderboard </button>
+        </p>
+    </div>
+
+    <TheMatch.Blazor.Components.Summary PassedMatch="PassedMatch" Player="Player" />
+
+</div>
+
+@code {
+
+    private int hole = 0;
+    private int score = 0;
+    private int par = 0;
+    private string notes = "";
+    private string fairway = "";
+    private string green = "";
+    private int putts = 0;
+
+    private bool _isDirty = false;
+
+    private TheMatch.Domain.MatchHole selectedHole;
+
+    [Parameter]
+    public EventCallback<bool> OnPlayerCardClosed { get; set; }
+
+    [Parameter]
+    public Domain.MatchPlayer Player { get; set; }
+
+
+    [Parameter]
+    public Domain.Match PassedMatch { get; set; }
+
+
+    protected override void OnParametersSet()
+    {
+        selectedHole = Player.ScoreCard.Holes.OrderBy(y => y.Id).Where(x => x.Score == 0).FirstOrDefault();
+        if (selectedHole == null)
+        {
+            selectedHole = Player.ScoreCard.Holes.OrderBy(y => y.Id).FirstOrDefault();
+        }
+        hole = selectedHole.Id;
+        par = selectedHole.Par;
+        score = selectedHole.Score;
+        notes = selectedHole.Notes;
+        fairway = selectedHole.Fairway;
+        green = selectedHole.Green;
+        putts = selectedHole.Putts;
+    }
+
+    void UpdateHoleUp()
+    {
+        Save();
+
+        var maxHole = Player.ScoreCard.Holes.Max(x => x.Id);
+        var minHole = Player.ScoreCard.Holes.Min(x => x.Id);
+
+        if (hole >= maxHole)
+        {
+            hole = minHole;
+        }
+        else
+        {
+            hole++;
+        }
+
+        SetSelectedHole();
+
+    }
+
+    void Save()
+    {
+        if (_isDirty)
+        {
+            var playerHole = PassedMatch.Players.Where(x => x.Id == Player.Id).FirstOrDefault().ScoreCard.Holes.Where(y => y.Id == hole).FirstOrDefault();
+            playerHole.Score = score;
+            playerHole.Notes = notes;
+            playerHole.Fairway = fairway;
+            playerHole.Green = green;
+            playerHole.Putts = putts;
+            MatchRepository.Save(PassedMatch);
+            _isDirty = false;
+        }
+    }
+
+    void SetSelectedHole()
+    {
+        selectedHole = PassedMatch.Players.Where(x => x.Id == Player.Id).FirstOrDefault().ScoreCard.Holes.Where(y => y.Id == hole).FirstOrDefault();
+        score = selectedHole.Score;
+        par = selectedHole.Par;
+        notes = selectedHole.Notes;
+        fairway = selectedHole.Fairway;
+        green = selectedHole.Green;
+        putts = selectedHole.Putts;
+    }
+
+    void UpdateHoleDown()
+    {
+
+        Save();
+
+        var maxHole = Player.ScoreCard.Holes.Max(x => x.Id);
+        var minHole = Player.ScoreCard.Holes.Min(x => x.Id);
+
+        if (hole <= minHole)
+        {
+            hole = maxHole;
+        }
+        else
+        {
+            hole--;
+        }
+        SetSelectedHole();
+    }
+
+    void UpdateScoreWithButton(int ScoreToPar)
+    {
+        selectedHole.Score = par + ScoreToPar;
+        score = selectedHole.Score;
+        Save();        
+        _isDirty = false;
+
+    }
+
+    string IsActiveScoreButton(int button)
+    {
+        if (score - par == button)
+        {
+            return "active";
+        }
+
+        if (score - par == button)
+        {
+            return "active";
+        }
+
+        return "";
+
+    }
+
+    void FairWaySelectionChanged(int FairWayValue)
+    {
+        _isDirty = true;
+        switch (FairWayValue)
+        {
+            case 0:
+                fairway = "Fairway";
+                break;
+            case 1:
+                fairway = "Left";
+                break;
+            case 2:
+                fairway = "Right";
+                break;
+            case 3:
+                fairway = "Long";
+                break;
+            case 4:
+                fairway = "Short";
+                break;
+        }
+    }
+
+    void GreenSelectionChanged(int GreenValueChanged)
+    {
+        _isDirty = true;
+
+        switch (GreenValueChanged)
+        {
+            case 0:
+                green = "Yes";
+                break;
+            case 1:
+                green = "No";
+                break;
+        }
+
+    }
+
+    void PuttsSelectionChanged(int PuttsValueChanged)
+    {
+        _isDirty = true;
+        putts = PuttsValueChanged;
+    }
+
+
+    async void PlayerCardClosed()
+    {
+        Save();
+        await OnPlayerCardClosed.InvokeAsync(true);
+    }
+
+    string PuttsChecked(int NumberOfPutts)
+    {
+        if (putts == NumberOfPutts)
+        {
+            return "active";
+        }
+        return "";
+
+    }
+
+    string GreensChecked(int GreenButton)
+    {
+        if (green == "Yes" && GreenButton == 0)
+        {
+            return "active";
+        }
+
+        if (green == "No" && GreenButton == 1)
+        {
+            return "active";
+        }
+        return "";
+    }
+
+    string FairWayChecked(int FairWayButton)
+    {
+        switch (FairWayButton)
+        {
+            case 0:
+                if (fairway == "Fairway")
+                {
+                    return "active";
+                }
+                else
+                {
+                    return "";
+                }
+
+            case 1:
+                if (fairway == "Left")
+                {
+                    return "active";
+                }
+                else
+                {
+                    return "";
+                }
+            case 2:
+                if (fairway == "Right")
+                {
+                    return "active";
+                }
+                else
+                {
+                    return "";
+                }
+            case 3:
+                if (fairway == "Long")
+                {
+                    return "active";
+                }
+                else
+                {
+                    return "";
+                }
+            case 4:
+                if (fairway == "Short")
+                {
+                    return "active";
+                }
+                else
+                {
+                    return "";
+                }
+        }
+        return "";
+    }
+
+}

@@ -1,0 +1,29 @@
+﻿@page "/matches"
+@inject Domain.IMatchRepository MatchRepository
+@inject NavigationManager NavigationManager
+
+<div class="col-sm-3">
+    <h3>Matches</h3>
+    <div class="list-group">
+        @foreach (Domain.Match match in matches)
+        {
+            <button type="button" class="list-group-item list-group-item-action" @onclick="@(() => LoadMatch(match))">@match.Name</button>
+        }
+    </div>
+</div>
+
+@code {
+
+    private List<Domain.Match> matches;
+
+    protected override void OnInitialized()
+    {
+        matches = MatchRepository.GetMatches();
+    }
+
+    void LoadMatch(Domain.Match match)
+    {
+        NavigationManager.NavigateTo("Match/" + match.Id);
+    }
+
+}

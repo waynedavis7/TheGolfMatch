@@ -1,0 +1,172 @@
+﻿@inject NavigationManager Navigationmanager
+@if (PassedMatch != null)
+{
+
+    @if (showPlayer)
+    {
+        <TheMatch.Blazor.Components.PlayerScoreCard Player="selectedPlayer" PassedMatch="PassedMatch" OnPlayerCardClosed="PlayerCardClosed" />
+    }
+    else
+    {
+        <div>
+            <h3><a href="@url">@PassedMatch.Name</a></h3>
+            <h6>@PassedMatch.Course.Name &nbsp;&nbsp; </h6>
+            <div class="pull-right m-2"><Switch TValue="bool" Checked="@showPoints" CheckedChanged="@OnRememberMeChanged"> &nbsp;Show Points</Switch></div>
+        </div>
+
+        <table class="table table-bordered table-condensed table-sm text-center">
+            @if (PassedMatch.Course.Tees.FirstOrDefault().Holes.Count > 9 || (PassedMatch.Course.Tees.FirstOrDefault().Holes.Count == 9 && PassedMatch.Course.Tees.FirstOrDefault().Holes.Min(x => x.Id) < 9))
+            {
+                <tr class="table-info">
+                    <td class="text-right font-weight-bold text-sm-right">Hole</td>
+                    @foreach (Domain.Hole hole in PassedMatch.Course.Tees.FirstOrDefault().Holes.Where(x => x.Id < 10))
+                    {
+                        <td class="font-weight-bold text-sm-center">@hole.Name</td>
+                    }
+                    <td></td>
+                    <td class="font-weight-bold">Total</td>
+                </tr>
+                <tr class="table-secondary">
+                    <td class="text-right text-sm-right">Par</td>
+                    @foreach (Domain.Hole hole in PassedMatch.Course.Tees.FirstOrDefault().Holes.Where(x => x.Id < 10))
+                    {
+                        <td class="text-sm-center">@hole.Par</td>
+                    }
+                    <td>@PassedMatch.Course.Tees.FirstOrDefault().ScoreToParFront9().ToString()</td>
+                    <td></td>
+                </tr>
+                @foreach (Domain.MatchPlayer player in PassedMatch.Players)
+                {
+                    <tr @onclick="(()=> SetPlayer(player))">
+                        <td class="text-left text-sm-left"> @player.Name <span class="font-weight-bold" hidden="@hidePoints">&nbsp;@player.RequiredPoints</span> </td>
+                        @foreach (Domain.MatchHole hole in player.ScoreCard.Holes.Where(x => x.Id < 10))
+                        {
+                            <td>
+                                <span class="@hole.ScoreDescription">
+                                    @if (showPoints)
+                                    {@hole.Points }
+                                else
+                                { @hole.Score}
+                                </span>
+                            </td>
+                        }
+                        @if (showPoints)
+                        {
+                            <td class="subTotal">@player.ScoreCard.TotalFrontPoints</td>
+                            <td class="total">@player.ScoreCard.TotalFrontPoints</td>
+                        }
+                        else
+                        {
+                            <td class="subTotal">@player.ScoreCard.TotalFrontScore</td>
+                            <td class="total">@player.ScoreCard.TotalFrontScore</td>
+                        }
+
+                    </tr>
+                }
+            }
+
+            @if (PassedMatch.Course.Tees.FirstOrDefault().Holes.Count > 9 || (PassedMatch.Course.Tees.FirstOrDefault().Holes.Count == 9 && PassedMatch.Course.Tees.FirstOrDefault().Holes.Min(x => x.Id) > 9))
+            {
+                <tr class="table-info">
+                    <td class="text-right font-weight-bold text-sm-right">Hole</td>
+                    @foreach (Domain.Hole hole in PassedMatch.Course.Tees.FirstOrDefault().Holes.Where(x => x.Id >= 10))
+                    {
+                        <td class="font-weight-bold text-sm-center">@hole.Name</td>
+                    }
+                    <td></td>
+                    <td class="font-weight-bold">Total</td>
+                </tr>
+                <tr class="table-secondary">
+                    <td class="text-right text-sm-right">Par</td>
+                    @foreach (Domain.Hole hole in PassedMatch.Course.Tees.FirstOrDefault().Holes.Where(x => x.Id >= 10))
+                    {
+                        <td class="text-sm-center">@hole.Par</td>
+                    }
+                    <td>@PassedMatch.Course.Tees.FirstOrDefault().ScoreToParBack9().ToString()</td>
+                    <td></td>
+
+                </tr>
+                @foreach (Domain.MatchPlayer player in PassedMatch.Players)
+                {
+                    <tr @onclick="(()=> SetPlayer(player))">
+                        <td class="text-left text-sm-left">@player.Name <span class="font-weight-bold" hidden="@hidePoints">&nbsp;@player.RequiredPoints</span> </td>
+                        @foreach (Domain.MatchHole hole in player.ScoreCard.Holes.Where(x => x.Id >= 10))
+                        {
+                            <td>
+                                <span class="@hole.ScoreDescription">
+                                    @if (showPoints)
+                                    {@hole.Points }
+                                else
+                                { @hole.Score}
+                                </span>
+                            </td>
+                        }
+                        @if (showPoints)
+                        {
+                            <td class="subTotal">@player.ScoreCard.TotalBackPoints</td>
+                            <td class="total">@player.ScoreCard.TotalPoints</td>
+                        }
+                        else
+                        {
+                            <td class="subTotal">@player.ScoreCard.TotalBackScore</td>
+                            <td class="total">@player.ScoreCard.TotalScore</td>
+                        }
+                    </tr>
+                }
+
+            }
+
+        </table>
+    }
+
+}
+
+@code {
+
+    bool showPoints = false;
+    bool hidePoints = true;
+
+    private Modal modalRef;
+    private Domain.MatchPlayer selectedPlayer = new Domain.MatchPlayer();
+
+    private bool showPlayer;
+    private string url;
+
+    [Parameter]
+    public Domain.Match PassedMatch { get; set; }
+
+    [Parameter]
+    public EventCallback<bool> OnPlayerSelected { get; set; }
+
+    [Parameter]
+    public bool NoEdits { get; set; }
+
+    protected override void OnInitialized()
+    {
+        url = Navigationmanager.Uri + "/true";
+    }
+
+    void OnRememberMeChanged(bool value)
+    {
+        showPoints = value;
+        hidePoints = !showPoints;
+    }
+
+    async void SetPlayer(Domain.MatchPlayer player)
+    {
+        if (!NoEdits)
+        {
+            selectedPlayer = player;
+            showPlayer = true;
+            await OnPlayerSelected.InvokeAsync(showPlayer);
+        }
+    }
+
+    public async void PlayerCardClosed(bool closed)
+    {
+        selectedPlayer = null;
+        showPlayer = false;
+        StateHasChanged();
+        await OnPlayerSelected.InvokeAsync(showPlayer);
+    }
+}

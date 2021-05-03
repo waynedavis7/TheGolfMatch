@@ -1,0 +1,151 @@
+﻿@page "/match/{MatchId:int}"
+@page "/match/{MatchId:int}/{NoEdits:bool}"
+@inject Domain.IMatchRepository MatchRepository
+@inject IJSRuntime js
+@inject NavigationManager MyNavigationManager
+
+<div class="col-sm-3 w-100">
+    @if (match.Players == null || match.Players.Count() == 0)
+    {
+        <TheMatch.Blazor.Components.Course PassedCourse="@match.Course" />
+    }
+
+</div>
+
+<div class="col-sm-3">
+    @if (match.Players != null && match.Players.Count() > 0)
+    {
+        <TheMatch.Blazor.Components.LeaderBoard PassedMatch="match" OnPlayerSelected="PlayerSelected" NoEdits="@NoEdits" />
+    }
+
+</div>
+
+@if (!addPlayer && showAddPlayer && !NoEdits)
+{
+<div class="col-sm-3">
+    <button type="button" class="btn btn-primary btn-sm" @onclick="AddAPlayer">Add Player &nbsp;&nbsp;<span class="oi oi-plus"></span> </button>
+    <button type="button" class="btn btn-danger btn-sm pull-right" @onclick="DeleteMatch">Delete Match &nbsp;&nbsp;<span class="oi oi-x"></span> </button>
+</div>
+    <br />
+}
+
+@if (addPlayer)
+{
+    <div class="col-sm-2">
+
+        <EditForm Model="@newPlayer" OnSubmit="@AddPlayerFormSubmitted">
+            <DataAnnotationsValidator />
+            <div class="form-group">
+                <label>Player id (i.e. @@playerid)</label>
+                <InputText id="txtPlayerId" class="form-control" @bind-Value="@newPlayer.Id" />
+                <ValidationMessage For="@(() => newPlayer.Id)" />
+            </div>
+            <div class="form-group">
+                <label>Player Name</label>
+                <InputText class="form-control" @bind-Value="@newPlayer.Name" />
+                <ValidationMessage For="@(() => newPlayer.Name)" />
+
+            </div>
+            <div class="form-group">
+                <label>Points</label>
+                <InputNumber class="form-control" @bind-Value="@newPlayer.RequiredPoints" />
+                <ValidationMessage For="@(() => newPlayer.RequiredPoints)" />
+
+            </div>
+
+            <div class="form-group">
+                <label>Tees</label>
+                <InputSelect @bind-Value="selectedTees" class="form-control">
+                    <option value="">Select tees ...</option>
+                    @foreach (Domain.Tee t in match.Course.Tees)
+                        {
+                        <option value="@t.Name">@t.Name </option>
+                        }
+                </InputSelect>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-sm">Save &nbsp;&nbsp;<span class="oi oi-check"></span></button>
+            <button type="button" class="btn btn-danger btn-sm" @onclick="CancelAddPlayer">Cancel &nbsp;&nbsp;<span class="oi oi-x"></span> </button>
+
+        </EditForm>
+    </div>
+    <br />
+}
+
+
+
+@code {
+
+    private Domain.Match match;
+    private bool addPlayer;
+    private bool showAddPlayer = true;
+    private Domain.MatchPlayer newPlayer = new Domain.MatchPlayer();
+    string LastSubmitResult;
+    private string selectedTees;
+
+
+    protected override void OnInitialized()
+    {
+        match = MatchRepository.GetMatch(MatchId);
+    }
+
+    [Parameter]
+    public int MatchId { get; set; }
+
+    [Parameter]
+    public bool NoEdits { get; set; }
+
+    void AddAPlayer()
+    {
+        addPlayer = true;
+        newPlayer = new Domain.MatchPlayer();
+    }
+
+    async Task DeleteMatch()
+    {
+        if (!await js.Confirm("Are you sure you want to delete the match?"))
+            return;
+
+        MatchRepository.Delete(match);
+        MyNavigationManager.NavigateTo("Matches");
+    }
+
+    void CancelAddPlayer()
+    {
+        addPlayer = false;
+    }
+    void AddPlayerFormSubmitted(EditContext editContext)
+    {
+        bool formIsValid = editContext.Validate();
+        LastSubmitResult =
+          formIsValid
+          ? "Success - form was valid"
+          : "Failure - form was invalid";
+
+        if (formIsValid)
+        {
+            newPlayer.ScoreCard = new Domain.ScoreCard();
+
+            foreach (Domain.Hole hole in match.Course.Tees.Where(x => x.Name == selectedTees).FirstOrDefault().Holes)
+            {
+                newPlayer.ScoreCard.Holes.Add(new Domain.MatchHole { Id = hole.Id, Name = hole.Name, Par = hole.Par, Score = 0, Tee = selectedTees, Yards = hole.Yards, Handicap = hole.Handicap });
+            }
+
+            addPlayer = false;
+            if (match.Players == null)
+            {
+                match.Players = new List<Domain.MatchPlayer>();
+            }
+            match.Players.Add(newPlayer);
+            MatchRepository.Save(match);
+        }
+
+    }
+
+    public void PlayerSelected(bool playerSelected)
+    {
+        showAddPlayer = !playerSelected;
+    }
+
+}

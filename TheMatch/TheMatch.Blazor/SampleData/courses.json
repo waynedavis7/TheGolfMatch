@@ -1,0 +1,694 @@
+[
+    {
+        "Id": 1,
+        "Name": "Stone Creek - Front 9",
+        "Tees": [
+            {
+                "Name": "Blue",
+                "Holes": [
+                    {
+                        "Id": 1,
+                        "Name": "1",
+                        "Par": 4,
+                        "Yards": 326,
+                        "Handicap": 15
+                    },
+                    {
+                        "Id": 2,
+                        "Name": "2",
+                        "Par": 4,
+                        "Yards": 334,
+                        "Handicap": 7
+                    },
+                    {
+                        "Id": 3,
+                        "Name": "3",
+                        "Par": 5,
+                        "Yards": 558,
+                        "Handicap": 3
+                    },
+                    {
+                        "Id": 4,
+                        "Name": "4",
+                        "Par": 4,
+                        "Yards": 298,
+                        "Handicap": 5
+                    },
+                    {
+                        "Id": 5,
+                        "Name": "5",
+                        "Par": 3,
+                        "Yards": 179,
+                        "Handicap": 9
+                    },
+                    {
+                        "Id": 6,
+                        "Name": "6",
+                        "Par": 5,
+                        "Yards": 487,
+                        "Handicap": 13
+                    },
+                    {
+                        "Id": 7,
+                        "Name": "4",
+                        "Par": 4,
+                        "Yards": 354,
+                        "Handicap": 11
+                    },
+                    {
+                        "Id": 8,
+                        "Name": "8",
+                        "Par": 3,
+                        "Yards": 114,
+                        "Handicap": 17
+                    },
+                    {
+                        "Id": 9,
+                        "Name": "9",
+                        "Par": 4,
+                        "Yards": 412,
+                        "Handicap": 1
+                    }
+                ]
+            },
+            {
+                "Name": "Red",
+                "Holes": [
+                    {
+                        "Id": 1,
+                        "Name": "1",
+                        "Par": 4,
+                        "Yards": 248,
+                        "Handicap": 15
+                    },
+                    {
+                        "Id": 2,
+                        "Name": "2",
+                        "Par": 4,
+                        "Yards": 240,
+                        "Handicap": 13
+                    },
+                    {
+                        "Id": 3,
+                        "Name": "3",
+                        "Par": 5,
+                        "Yards": 351,
+                        "Handicap": 1
+                    },
+                    {
+                        "Id": 4,
+                        "Name": "4",
+                        "Par": 4,
+                        "Yards": 235,
+                        "Handicap": 5
+                    },
+                    {
+                        "Id": 5,
+                        "Name": "5",
+                        "Par": 3,
+                        "Yards": 113,
+                        "Handicap": 11
+                    },
+                    {
+                        "Id": 6,
+                        "Name": "6",
+                        "Par": 5,
+                        "Yards": 378,
+                        "Handicap": 7
+                    },
+                    {
+                        "Id": 7,
+                        "Name": "4",
+                        "Par": 4,
+                        "Yards": 284,
+                        "Handicap": 9
+                    },
+                    {
+                        "Id": 8,
+                        "Name": "8",
+                        "Par": 3,
+                        "Yards": 65,
+                        "Handicap": 17
+                    },
+                    {
+                        "Id": 9,
+                        "Name": "9",
+                        "Par": 4,
+                        "Yards": 309,
+                        "Handicap": 3
+                    }
+                ]
+            }
+
+        ]
+
+    },
+    {
+        "Id": 2,
+        "Name": "Stone Creek - Back 9",
+        "Tees": [
+            {
+                "Name": "Blue",
+                "Holes": [
+                    {
+                        "Id": 10,
+                        "Name": "10",
+                        "Par": 4,
+                        "Yards": 308,
+                        "Handicap": 18
+                    },
+                    {
+                        "Id": 11,
+                        "Name": "11",
+                        "Par": 4,
+                        "Yards": 354,
+                        "Handicap": 14
+                    },
+                    {
+                        "Id": 12,
+                        "Name": "12",
+                        "Par": 5,
+                        "Yards": 455,
+                        "Handicap": 16
+                    },
+                    {
+                        "Id": 13,
+                        "Name": "13",
+                        "Par": 4,
+                        "Yards": 344,
+                        "Handicap": 8
+                    },
+                    {
+                        "Id": 14,
+                        "Name": "14",
+                        "Par": 5,
+                        "Yards": 493,
+                        "Handicap": 6
+                    },
+                    {
+                        "Id": 15,
+                        "Name": "15",
+                        "Par": 3,
+                        "Yards": 160,
+                        "Handicap": 12
+                    },
+                    {
+                        "Id": 16,
+                        "Name": "16",
+                        "Par": 4,
+                        "Yards": 398,
+                        "Handicap": 4
+                    },
+                    {
+                        "Id": 17,
+                        "Name": "17",
+                        "Par": 3,
+                        "Yards": 139,
+                        "Handicap": 10
+                    },
+                    {
+                        "Id": 18,
+                        "Name": "18",
+                        "Par": 4,
+                        "Yards": 398,
+                        "Handicap": 2
+                    }
+                ]
+            },
+            {
+                "Name": "Red",
+                "Holes": [
+                    {
+                        "Id": 10,
+                        "Name": "10",
+                        "Par": 4,
+                        "Yards": 227,
+                        "Handicap": 18
+                    },
+                    {
+                        "Id": 11,
+                        "Name": "11",
+                        "Par": 4,
+                        "Yards": 239,
+                        "Handicap": 14
+                    },
+                    {
+                        "Id": 12,
+                        "Name": "12",
+                        "Par": 5,
+                        "Yards": 377,
+                        "Handicap": 10
+                    },
+                    {
+                        "Id": 13,
+                        "Name": "13",
+                        "Par": 4,
+                        "Yards": 283,
+                        "Handicap": 8
+                    },
+                    {
+                        "Id": 14,
+                        "Name": "14",
+                        "Par": 5,
+                        "Yards": 431,
+                        "Handicap": 2
+                    },
+                    {
+                        "Id": 15,
+                        "Name": "15",
+                        "Par": 3,
+                        "Yards": 113,
+                        "Handicap": 12
+                    },
+                    {
+                        "Id": 16,
+                        "Name": "16",
+                        "Par": 4,
+                        "Yards": 324,
+                        "Handicap": 4
+                    },
+                    {
+                        "Id": 17,
+                        "Name": "17",
+                        "Par": 3,
+                        "Yards": 107,
+                        "Handicap": 16
+                    },
+                    {
+                        "Id": 18,
+                        "Name": "18",
+                        "Par": 4,
+                        "Yards": 307,
+                        "Handicap": 6
+                    }
+                ]
+            }
+        ]
+
+    },
+    {
+        "Id": 3,
+        "Name": "Stone Creek",
+        "Tees": [
+            {
+                "Name": "Blue",
+                "Holes": [
+                    {
+                        "Id": 1,
+                        "Name": "1",
+                        "Par": 4,
+                        "Yards": 326,
+                        "Handicap": 15
+                    },
+                    {
+                        "Id": 2,
+                        "Name": "2",
+                        "Par": 4,
+                        "Yards": 334,
+                        "Handicap": 7
+                    },
+                    {
+                        "Id": 3,
+                        "Name": "3",
+                        "Par": 5,
+                        "Yards": 558,
+                        "Handicap": 3
+                    },
+                    {
+                        "Id": 4,
+                        "Name": "4",
+                        "Par": 4,
+                        "Yards": 298,
+                        "Handicap": 5
+                    },
+                    {
+                        "Id": 5,
+                        "Name": "5",
+                        "Par": 3,
+                        "Yards": 179,
+                        "Handicap": 9
+                    },
+                    {
+                        "Id": 6,
+                        "Name": "6",
+                        "Par": 5,
+                        "Yards": 487,
+                        "Handicap": 13
+                    },
+                    {
+                        "Id": 7,
+                        "Name": "4",
+                        "Par": 4,
+                        "Yards": 354,
+                        "Handicap": 11
+                    },
+                    {
+                        "Id": 8,
+                        "Name": "8",
+                        "Par": 3,
+                        "Yards": 114,
+                        "Handicap": 17
+                    },
+                    {
+                        "Id": 9,
+                        "Name": "9",
+                        "Par": 4,
+                        "Yards": 412,
+                        "Handicap": 1
+                    },
+                    {
+                        "Id": 10,
+                        "Name": "10",
+                        "Par": 4,
+                        "Yards": 308,
+                        "Handicap": 18
+                    },
+                    {
+                        "Id": 11,
+                        "Name": "11",
+                        "Par": 4,
+                        "Yards": 354,
+                        "Handicap": 14
+                    },
+                    {
+                        "Id": 12,
+                        "Name": "12",
+                        "Par": 5,
+                        "Yards": 455,
+                        "Handicap": 16
+                    },
+                    {
+                        "Id": 13,
+                        "Name": "13",
+                        "Par": 4,
+                        "Yards": 344,
+                        "Handicap": 8
+                    },
+                    {
+                        "Id": 14,
+                        "Name": "14",
+                        "Par": 5,
+                        "Yards": 493,
+                        "Handicap": 6
+                    },
+                    {
+                        "Id": 15,
+                        "Name": "15",
+                        "Par": 3,
+                        "Yards": 160,
+                        "Handicap": 12
+                    },
+                    {
+                        "Id": 16,
+                        "Name": "16",
+                        "Par": 4,
+                        "Yards": 398,
+                        "Handicap": 4
+                    },
+                    {
+                        "Id": 17,
+                        "Name": "17",
+                        "Par": 3,
+                        "Yards": 139,
+                        "Handicap": 10
+                    },
+                    {
+                        "Id": 18,
+                        "Name": "18",
+                        "Par": 4,
+                        "Yards": 398,
+                        "Handicap": 2
+                    }
+                ]
+            },
+            {
+                "Name": "Red",
+                "Holes": [
+                    {
+                        "Id": 1,
+                        "Name": "1",
+                        "Par": 4,
+                        "Yards": 248,
+                        "Handicap": 15
+                    },
+                    {
+                        "Id": 2,
+                        "Name": "2",
+                        "Par": 4,
+                        "Yards": 240,
+                        "Handicap": 13
+                    },
+                    {
+                        "Id": 3,
+                        "Name": "3",
+                        "Par": 5,
+                        "Yards": 351,
+                        "Handicap": 1
+                    },
+                    {
+                        "Id": 4,
+                        "Name": "4",
+                        "Par": 4,
+                        "Yards": 235,
+                        "Handicap": 5
+                    },
+                    {
+                        "Id": 5,
+                        "Name": "5",
+                        "Par": 3,
+                        "Yards": 113,
+                        "Handicap": 11
+                    },
+                    {
+                        "Id": 6,
+                        "Name": "6",
+                        "Par": 5,
+                        "Yards": 378,
+                        "Handicap": 7
+                    },
+                    {
+                        "Id": 7,
+                        "Name": "4",
+                        "Par": 4,
+                        "Yards": 284,
+                        "Handicap": 9
+                    },
+                    {
+                        "Id": 8,
+                        "Name": "8",
+                        "Par": 3,
+                        "Yards": 65,
+                        "Handicap": 17
+                    },
+                    {
+                        "Id": 9,
+                        "Name": "9",
+                        "Par": 4,
+                        "Yards": 309,
+                        "Handicap": 3
+                    },
+                    {
+                        "Id": 10,
+                        "Name": "10",
+                        "Par": 4,
+                        "Yards": 227,
+                        "Handicap": 18
+                    },
+                    {
+                        "Id": 11,
+                        "Name": "11",
+                        "Par": 4,
+                        "Yards": 239,
+                        "Handicap": 14
+                    },
+                    {
+                        "Id": 12,
+                        "Name": "12",
+                        "Par": 5,
+                        "Yards": 377,
+                        "Handicap": 10
+                    },
+                    {
+                        "Id": 13,
+                        "Name": "13",
+                        "Par": 4,
+                        "Yards": 283,
+                        "Handicap": 8
+                    },
+                    {
+                        "Id": 14,
+                        "Name": "14",
+                        "Par": 5,
+                        "Yards": 431,
+                        "Handicap": 2
+                    },
+                    {
+                        "Id": 15,
+                        "Name": "15",
+                        "Par": 3,
+                        "Yards": 113,
+                        "Handicap": 12
+                    },
+                    {
+                        "Id": 16,
+                        "Name": "16",
+                        "Par": 4,
+                        "Yards": 324,
+                        "Handicap": 4
+                    },
+                    {
+                        "Id": 17,
+                        "Name": "17",
+                        "Par": 3,
+                        "Yards": 107,
+                        "Handicap": 16
+                    },
+                    {
+                        "Id": 18,
+                        "Name": "18",
+                        "Par": 4,
+                        "Yards": 307,
+                        "Handicap": 6
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "Id": 4,
+        "Name": "Osprey Cove",
+        "Tees": [
+            {
+                "Name": "Boys 11",
+                "Holes": [
+                    {
+                        "Id": 1,
+                        "Name": "1",
+                        "Par": 4,
+                        "Yards": 290,
+                        "Handicap": 1
+                    },
+                    {
+                        "Id": 2,
+                        "Name": "2",
+                        "Par": 4,
+                        "Yards": 285,
+                        "Handicap": 2
+                    },
+                    {
+                        "Id": 3,
+                        "Name": "3",
+                        "Par": 5,
+                        "Yards": 385,
+                        "Handicap": 3
+                    },
+                    {
+                        "Id": 4,
+                        "Name": "4",
+                        "Par": 3,
+                        "Yards": 95,
+                        "Handicap": 4
+                    },
+                    {
+                        "Id": 5,
+                        "Name": "5",
+                        "Par": 4,
+                        "Yards": 270,
+                        "Handicap": 5
+                    },
+                    {
+                        "Id": 6,
+                        "Name": "6",
+                        "Par": 5,
+                        "Yards": 380,
+                        "Handicap": 6
+                    },
+                    {
+                        "Id": 7,
+                        "Name": "4",
+                        "Par": 3,
+                        "Yards": 130,
+                        "Handicap": 7
+                    },
+                    {
+                        "Id": 8,
+                        "Name": "8",
+                        "Par": 4,
+                        "Yards": 295,
+                        "Handicap": 8
+                    },
+                    {
+                        "Id": 9,
+                        "Name": "9",
+                        "Par": 4,
+                        "Yards": 270,
+                        "Handicap": 9
+                    },
+                    {
+                        "Id": 10,
+                        "Name": "10",
+                        "Par": 4,
+                        "Yards": 290,
+                        "Handicap": 10
+                    },
+                    {
+                        "Id": 11,
+                        "Name": "11",
+                        "Par": 3,
+                        "Yards": 75,
+                        "Handicap": 11
+                    },
+                    {
+                        "Id": 12,
+                        "Name": "12",
+                        "Par": 4,
+                        "Yards": 250,
+                        "Handicap": 12
+                    },
+                    {
+                        "Id": 13,
+                        "Name": "13",
+                        "Par": 5,
+                        "Yards": 400,
+                        "Handicap": 13
+                    },
+                    {
+                        "Id": 14,
+                        "Name": "14",
+                        "Par": 5,
+                        "Yards": 390,
+                        "Handicap": 14
+                    },
+                    {
+                        "Id": 15,
+                        "Name": "15",
+                        "Par": 4,
+                        "Yards": 285,
+                        "Handicap": 15
+                    },
+                    {
+                        "Id": 16,
+                        "Name": "16",
+                        "Par": 4,
+                        "Yards": 285,
+                        "Handicap": 16
+                    },
+                    {
+                        "Id": 17,
+                        "Name": "17",
+                        "Par": 3,
+                        "Yards": 105,
+                        "Handicap": 17
+                    },
+                    {
+                        "Id": 18,
+                        "Name": "18",
+                        "Par": 4,
+                        "Yards": 310,
+                        "Handicap": 18
+                    }
+                ]
+            }
+        ]
+    }
+]

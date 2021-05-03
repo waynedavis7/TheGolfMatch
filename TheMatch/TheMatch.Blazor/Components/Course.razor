@@ -1,0 +1,74 @@
+﻿
+@if (PassedCourse != null)
+{
+    <h5>@PassedCourse.Name</h5>
+
+    @if (PassedCourse.Tees.FirstOrDefault().Holes.Count > 9)
+    {
+        <table class="table table-condensed table-bordered table-sm text-center">
+            <tr class="table-info">
+                <td class="font-weight-bold text-sm-left">Hole</td>
+                @foreach (Domain.Hole hole in PassedCourse.Tees.FirstOrDefault().Holes.Where(x => x.Id < 10))
+                {
+                    <td class="font-weight-bold text-sm-center">@hole.Name</td>
+                }
+                <td></td>
+            </tr>
+            <tr>
+                <td class="text-left text-sm-left">Par</td>
+                @foreach (Domain.Hole hole in PassedCourse.Tees.FirstOrDefault().Holes.Where(x => x.Id < 10))
+                {
+                    <td class="text-sm-center">@hole.Par</td>
+                }
+                <td>@PassedCourse.Tees.FirstOrDefault().ScoreToParFront9().ToString()</td>
+            </tr>
+        </table>
+
+        <table class="table table-condensed table-bordered table-sm text-center">
+            <tr class="table-info">
+                <td class="font-weight-bold text-sm-left">Hole</td>
+                @foreach (Domain.Hole hole in PassedCourse.Tees.FirstOrDefault().Holes.Where(x => x.Id >= 10))
+                {
+                    <td class="font-weight-bold text-sm-center">@hole.Name</td>
+                }
+                <td></td>
+            </tr>
+            <tr>
+                <td class="text-left text-sm-left">Par</td>
+                @foreach (Domain.Hole hole in PassedCourse.Tees.FirstOrDefault().Holes.Where(x => x.Id >= 10))
+                {
+                    <td class="text-sm-center">@hole.Par</td>
+                }
+                <td>@PassedCourse.Tees.FirstOrDefault().ScoreToParBack9().ToString()</td>
+            </tr>
+        </table>
+
+    }
+    else
+    {
+        <table class="table table-condensed table-bordered table-sm text-center">
+            <tr class="table-info">
+                <td class="font-weight-bold text-sm-left">Hole</td>
+                @foreach (Domain.Hole hole in PassedCourse.Tees.FirstOrDefault().Holes)
+                {
+                    <td class="font-weight-bold text-sm-center">@hole.Name</td>
+                }
+                <td></td>
+            </tr>
+            <tr>
+                <td class="text-left text-sm-left">Par</td>
+                @foreach (Domain.Hole hole in PassedCourse.Tees.FirstOrDefault().Holes)
+                {
+                    <td class="text-sm-center">@hole.Par</td>
+                }
+                <td>@PassedCourse.Tees.FirstOrDefault().ScoreToPar().ToString()</td>
+            </tr>
+        </table>
+    }
+}
+
+@code {
+
+    [Parameter]
+    public Domain.Course PassedCourse { get; set; }
+}

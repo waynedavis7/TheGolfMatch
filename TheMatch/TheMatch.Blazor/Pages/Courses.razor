@@ -1,0 +1,47 @@
+﻿@page "/courses"
+@inject Domain.ICourseRepository CourseRepository
+
+<div class="col-sm-3">
+
+    @if (isLoading)
+    {
+        <div class="loader">Loading...</div>
+    }
+    else
+    {
+        <div class="form-group">
+            <label>Course :</label>
+            <select class="selectpicker form-control" @onchange="NewCourseSelected">
+                <option value="-1">--select course--</option>
+                @foreach (var course in courses)
+                {
+                    <option value="@course.Id">@course.Name</option>
+                }
+            </select>
+        </div>
+        <TheMatch.Blazor.Components.Course PassedCourse="@selectedCourse" />
+    }
+
+</div>
+
+@code {
+    private List<Domain.Course> courses;
+    private Domain.Course selectedCourse;
+    private Domain.Match newMatch = new Domain.Match { Name = "", Course = new Domain.Course() };
+
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        courses = await CourseRepository.GetCoursesAsync();
+        isLoading = false;
+    }
+    void NewCourseSelected(ChangeEventArgs e)
+    {
+        newMatch.Course.Id = Int32.Parse(e.Value.ToString());
+        selectedCourse = CourseRepository.GetCourse(newMatch.Course.Id);
+    }
+
+
+}
+

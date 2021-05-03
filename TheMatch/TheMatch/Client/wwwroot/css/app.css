@@ -1,0 +1,276 @@
+﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+@import url('https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+
+html, body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+a, .btn-link {
+    color: #0366d6;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
+
+.content {
+    padding-top: 1.1rem;
+}
+
+.valid.modified:not([type=checkbox]) {
+    outline: 1px solid #26b050;
+}
+
+.invalid {
+    outline: 1px solid red;
+}
+
+.validation-message {
+    color: red;
+}
+
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
+
+.table-condensed {
+    font-size: 10px;
+}
+
+.birdie {
+    /*font-family: 'Brush Script MT','Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.65em;*/
+    font-weight: bold;
+    border: 1px inset;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 50%;
+    background-color: white;
+    border-color: black;
+    color: black;
+}
+
+.eagle {
+    /*font-family: 'Brush Script MT','Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.65em;*/
+    font-weight: bold;
+    border: 1px inset;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-radius: 50%;
+    background-color: black;
+    border-color: black;
+    color: white;
+}
+
+.holeNavigationDown {
+    padding-top: 0px;
+    padding-right: 5px;
+    vertical-align: middle;
+}
+
+.holeNavigationUp {
+    padding-top: 0px;
+    padding-left: 5px;
+    vertical-align: middle;
+}
+
+
+.bogey {
+    /*font-family: 'Brush Script MT','Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.65em;*/
+    border: 1px inset;
+    padding-left: 4px;
+    padding-right: 4px;
+    background-color: none;
+    border-color: black;
+    color: black;
+}
+
+.par {
+    /*font-family: 'Brush Script MT','Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.65em;*/
+    color: black;
+}
+
+.doublebogey {
+    /*font-family: 'Brush Script MT','Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.65em;*/
+    border: 1px inset;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-color: black;
+    background-color: black;
+    color: white;
+}
+
+.other {
+    /*font-family: 'Brush Script MT','Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.65em;*/
+    border: 1px inset;
+    padding-left: 4px;
+    padding-right: 4px;
+    border-color: black;
+    background-color: black;
+    color: white;
+}
+
+.notscored {
+    background-color: white;
+    color: white;
+}
+
+.playerHeading {
+    color: lightslategray;
+    /*padding: 8px 8px 8px 8px;*/
+}
+
+.playerScore {
+    color: blue;
+    /*padding: 20px 20px 20px 20px;*/
+    padding: 20px 20px 20px 20px;
+}
+
+.scoreBox {
+    border: 0px solid;
+    background-color: none;
+    border-color: lightgray;
+}
+
+.subTotal {
+    /*font-family: 'Brush Script MT','Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.65em;*/
+    /*background-color: lightyellow;*/
+    font-weight: bold;
+}
+
+.total {
+    /*font-family: 'Brush Script MT','Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-size: 1.65em;*/
+    /*background-color: #DDFEAF;*/
+    font-weight: bold;
+}
+
+.scoreButton {
+    width: 60px;
+    margin: 1px 0px 1px 0px;
+}
+
+
+@media (min-width: 370px) {
+    .scoreButton {
+        width: 72px;
+        margin: 1px 1px 1px 1px;
+    }
+}
+
+.playerBanner {
+    margin: 5px 0px 5px 0px;
+    padding: 5px 5px 5px 5px;
+    /* background-color: rgba(0,0,0,.05);*/
+    /*background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);*/
+    /*background: rgb(103,102,110);*/
+    /*background: linear-gradient(350deg, rgba(103,102,110,1) 2%, rgba(64,64,66,0.5055008791805653) 9%, rgba(201,196,196,1) 62%);*/
+    /*background: linear-gradient(90deg, rgba(103,102,110,1) 2%, rgba(55,55,68,1) 9%, rgba(201,196,196,1) 62%);*/
+    /*color: white;*/
+}
+
+/*.playerBanner h4 {
+    color: white;
+ }
+
+ .playerBanner h6 {
+    color: white;
+  }
+*/
+
+.loader,
+.loader:before,
+.loader:after {
+    background: #ffffff;
+    -webkit-animation: load1 1s infinite ease-in-out;
+    animation: load1 1s infinite ease-in-out;
+    width: 1em;
+    height: 4em;
+}
+
+    .loader,
+    .loader:before,
+    .loader:after {
+        background: #0d0d0d;
+        -webkit-animation: load1 1s infinite ease-in-out;
+        animation: load1 1s infinite ease-in-out;
+        width: 1em;
+        height: 4em;
+    }
+
+.loader {
+    color: #0d0d0d;
+    text-indent: -9999em;
+    margin: 88px auto;
+    position: relative;
+    font-size: 11px;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+}
+
+    .loader:before,
+    .loader:after {
+        position: absolute;
+        top: 0;
+        content: '';
+    }
+
+    .loader:before {
+        left: -1.5em;
+        -webkit-animation-delay: -0.32s;
+        animation-delay: -0.32s;
+    }
+
+    .loader:after {
+        left: 1.5em;
+    }
+
+@-webkit-keyframes load1 {
+    0%, 80%, 100% {
+        box-shadow: 0 0;
+        height: 4em;
+    }
+
+    40% {
+        box-shadow: 0 -2em;
+        height: 5em;
+    }
+}
+
+@keyframes load1 {
+    0%, 80%, 100% {
+        box-shadow: 0 0;
+        height: 4em;
+    }
+
+    40% {
+        box-shadow: 0 -2em;
+        height: 5em;
+    }
+}
