@@ -1,0 +1,37 @@
+﻿@page "/matches"
+@inject NavigationManager NavigationManager
+@inject HttpClient http
+
+
+<div class="col-sm-3">
+    <h3>Matches</h3>
+    <div class="list-group">
+        @if (matches != null)
+        {
+            @foreach (Domain.Match match in matches)
+            {
+                <button type="button" class="list-group-item list-group-item-action" @onclick="@(() => LoadMatch(match))">@match.Name</button>
+            }
+        }
+
+    </div>
+</div>
+
+@code {
+
+    private TheMatch.Domain.Match[] matches;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        matches = await http.GetFromJsonAsync<TheMatch.Domain.Match[]>("Match");
+        StateHasChanged();
+        //isLoading = false;
+    }
+
+    void LoadMatch(Domain.Match match)
+    {
+        NavigationManager.NavigateTo("Match/" + match.Id);
+    }
+
+}

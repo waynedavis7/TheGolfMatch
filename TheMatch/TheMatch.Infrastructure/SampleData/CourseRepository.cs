@@ -34,6 +34,16 @@ namespace TheMatch.Infrastructure.SampleData
         public void AddCourse(Course course)
         {
             //_courses.Add(course);             
+            //var sort = Builders<Match>.Sort.Descending("Id"); //build sort object   
+            //FilterDefinition<Match> filterMatchData = Builders<Match>.Filter.Gt("Id", -1);
+            //var lastMatch = _collection.Find(filterMatchData).Sort(sort).FirstOrDefault();
+
+            //if (lastMatch != null)
+            //{
+            //    match.Id = lastMatch.Id + 1;
+            //}
+
+            //_collection.InsertOne(match);
         }
 
         public void DeleteCourse(Course course)

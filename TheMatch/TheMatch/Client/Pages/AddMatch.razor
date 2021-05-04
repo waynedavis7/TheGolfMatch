@@ -1,0 +1,99 @@
+﻿@page "/addmatch"
+@inject NavigationManager NavigationManager
+@inject IJSRuntime js;
+@inject HttpClient http
+
+<div class="col-sm-3">
+
+    @if (isLoading)
+    {
+        <div class="loader">Loading...</div>
+    }
+    else
+    {
+
+        <EditForm Model="@newMatch" OnSubmit="@FormSubmitted">
+            <DataAnnotationsValidator />
+            <div class="form-group">
+                <label>Match Name :</label>
+                <InputText id="txtName" class="form-control" @bind-Value="@newMatch.Name" />
+                <ValidationMessage For="@(() => newMatch.Name)" />
+            </div>
+            <div class="form-group">
+                <label>Course :</label>
+                <select class="selectpicker form-control" @onchange="NewCourseSelected">
+                    <option value="-1">--select course--</option>
+                    @foreach (var course in courses)
+                    {
+                        <option value="@course.Id">@course.Name</option>
+                    }
+                </select>
+            </div>
+
+            <TheMatch.Client.Components.Course PassedCourse="@selectedCourse" />
+
+            <button type="submit" class="btn btn-primary">Add New Match</button>
+        </EditForm>
+    }
+
+</div>
+
+@code {
+    private TheMatch.Domain.Course[] courses;
+    private Domain.Course selectedCourse;
+    private Domain.Match newMatch = new Domain.Match { Name = "", Course = new Domain.Course() };
+
+    private bool isLoading = true;
+
+    string LastSubmitResult;
+
+    protected override async Task OnInitializedAsync()
+    {
+        courses = await http.GetFromJsonAsync<TheMatch.Domain.Course[]>("Course");
+        isLoading = false;
+    }
+
+    protected async override Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            //await js.InvokeVoidAsync("focusById", "txtName");
+        }
+    }
+
+    async void FormSubmitted(EditContext editContext)
+    {
+        bool formIsValid = editContext.Validate();
+        LastSubmitResult =
+          formIsValid
+          ? "Success - form was valid"
+          : "Failure - form was invalid";
+
+        if (formIsValid)
+        {
+            newMatch.Course = selectedCourse;
+            //MatchRepository.Add(newMatch);
+            //MatchRepository.Save();
+            await http.PostAsJsonAsync($"Match/", newMatch);
+            //NavigationManager.NavigateTo("Match/" + newMatch.Id);
+        }
+    }
+
+    async void NewCourseSelected(ChangeEventArgs e)
+    {
+        newMatch.Course.Id = Int32.Parse(e.Value.ToString());
+        selectedCourse = await http.GetFromJsonAsync<TheMatch.Domain.Course>($"Course/{e.Value.ToString()}");
+        StateHasChanged();
+    }
+
+    public void PlayerSelected()
+    {
+
+    }
+
+    public void PlayerUnSelected()
+    {
+
+    }
+
+}

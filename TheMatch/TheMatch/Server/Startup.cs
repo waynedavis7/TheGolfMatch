@@ -23,6 +23,7 @@ namespace TheMatch.Server
         {
 
             services.AddTransient<ICourseRepository, Infrastructure.SampleData.CourseRepository>();
+            services.AddTransient<IMatchRepository, Infrastructure.SampleData.MatchRepository>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
